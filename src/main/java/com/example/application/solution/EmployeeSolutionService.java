@@ -2,6 +2,8 @@ package com.example.application.solution;
 
 import com.example.application.Address;
 import com.example.application.AddressRepository;
+import com.example.application.Department;
+import com.example.application.DepartmentRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import dev.hilla.Nullable;
@@ -23,11 +25,13 @@ import java.util.stream.Collectors;
 public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO, Long> {
     private final EmployeeSolutionRepository employeeRepository;
     private final AddressRepository addressRepository;
+    private final DepartmentRepository departmentRepository;
     private final JpaFilterConverter jpaFilterConverter;
 
-    public EmployeeSolutionService(EmployeeSolutionRepository employeeRepository, AddressRepository addressRepository, JpaFilterConverter jpaFilterConverter) {
+    public EmployeeSolutionService(EmployeeSolutionRepository employeeRepository, AddressRepository addressRepository, DepartmentRepository departmentRepository, JpaFilterConverter jpaFilterConverter) {
         this.employeeRepository = employeeRepository;
         this.addressRepository = addressRepository;
+        this.departmentRepository = departmentRepository;
         this.jpaFilterConverter = jpaFilterConverter;
     }
 
@@ -49,6 +53,9 @@ public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO,
         employee.getAddress().setCity(value.address().city());
         addressRepository.save(employee.getAddress());
 
+        Department department = departmentRepository.getReferenceById(value.departmentId());
+        employee.setDepartment(department);
+
         return EmployeeSolutionDTO.fromEntity(employeeRepository.save(employee));
     }
 
@@ -61,8 +68,8 @@ public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO,
     public List<EmployeeSolutionDTO> list(Pageable pageable, @Nullable Filter filter) {
         // Map sort
         List<Sort.Order> orders = pageable.getSort().stream().map(order -> {
-            if (order.getProperty().equals("addressInfo")) {
-                return new Sort.Order(order.getDirection(), "address.street");
+            if (order.getProperty().equals("departmentName")) {
+                return new Sort.Order(order.getDirection(), "department.name");
             } else {
                 return order;
             }
@@ -74,8 +81,8 @@ public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO,
         if (filter instanceof AndFilter andFilter) {
             andFilter.getChildren().forEach(child -> {
                 if (child instanceof PropertyStringFilter propertyFilter) {
-                    if (propertyFilter.getPropertyId().equals("addressInfo")) {
-                        propertyFilter.setPropertyId("address.street");
+                    if (propertyFilter.getPropertyId().equals("departmentName")) {
+                        propertyFilter.setPropertyId("department.name");
                     }
                 }
             });
@@ -83,5 +90,9 @@ public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO,
 
         Specification<EmployeeSolution> spec = jpaFilterConverter.toSpec(filter, EmployeeSolution.class);
         return employeeRepository.findAll(spec, mappedPageable).map(EmployeeSolutionDTO::fromEntity).toList();
+    }
+
+    public List<Department> listDepartments() {
+        return departmentRepository.findAll();
     }
 }

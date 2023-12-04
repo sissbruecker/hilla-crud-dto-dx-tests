@@ -1,10 +1,12 @@
 package com.example.application.solution;
 
 import com.example.application.Address;
+import com.example.application.Department;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +25,9 @@ public class EmployeeSolution {
 
     @OneToOne
     private Address address;
+
+    @ManyToOne
+    private Department department;
 
     public Long getId() {
         return id;
@@ -54,5 +59,13 @@ public class EmployeeSolution {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
