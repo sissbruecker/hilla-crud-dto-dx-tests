@@ -1,14 +1,14 @@
-INSERT INTO address (street, city, country)
-VALUES ('12 Baker St', 'London', 'UK'),
-       ('2345 Park Ave', 'New York', 'USA'),
-       ('9/11 Kings Rd', 'Sydney', 'Australia'),
-       ('888 Orchard Ln', 'Vancouver', 'Canada'),
-       ('67 Shinjuku', 'Tokyo', 'Japan'),
-       ('23 Quay St', 'Dublin', 'Ireland'),
-       ('4321 King Blvd', 'Toronto', 'Canada'),
-       ('71 Beach Dr', 'Los Angeles', 'USA'),
-       ('222 Elm St', 'San Francisco', 'USA'),
-       ('56 River Rd', 'Paris', 'France');
+INSERT INTO address (street, city)
+VALUES ('12 Baker St', 'London'),
+       ('2345 Park Ave', 'New York'),
+       ('9/11 Kings Rd', 'Sydney'),
+       ('888 Orchard Ln', 'Vancouver'),
+       ('67 Shinjuku', 'Tokyo'),
+       ('23 Quay St', 'Dublin'),
+       ('4321 King Blvd', 'Toronto'),
+       ('71 Beach Dr', 'Los Angeles'),
+       ('222 Elm St', 'San Francisco'),
+       ('56 River Rd', 'Paris');
 
 INSERT INTO employee (name, email, address_id)
 VALUES ('Alice', 'alice@initech.com', 1),

@@ -45,9 +45,8 @@ public class EmployeeSolutionService implements CrudService<EmployeeSolutionDTO,
         if (employee.getAddress() == null) {
             employee.setAddress(new Address());
         }
-        employee.getAddress().setStreet(value.street());
-        employee.getAddress().setCity(value.city());
-        employee.getAddress().setCountry(value.country());
+        employee.getAddress().setStreet(value.address().street());
+        employee.getAddress().setCity(value.address().city());
         addressRepository.save(employee.getAddress());
 
         return EmployeeSolutionDTO.fromEntity(employeeRepository.save(employee));

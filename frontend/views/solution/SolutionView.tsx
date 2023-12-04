@@ -12,7 +12,7 @@ export default function SolutionView() {
                     visibleColumns: ['name', 'email', 'addressInfo'],
                 }}
                 formProps={{
-                    visibleFields: ['name', 'email', 'street', 'city', 'country']
+                    visibleFields: ['name', 'email', 'address.street', 'address.city']
                 }}
             />
         </div>

@@ -15,8 +15,6 @@ public class Address {
 
     private String city;
 
-    private String country;
-
     public Long getId() {
         return id;
     }
@@ -39,13 +37,5 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String zipCode) {
-        this.country = zipCode;
     }
 }
