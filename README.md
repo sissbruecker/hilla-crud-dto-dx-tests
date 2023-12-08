@@ -6,14 +6,11 @@ You have been given an application that contains an `Employee` JPA entity as wel
 
 1. Create a CRUD for listing and editing `EmployeeDTO`s and their related addresses.
 2. Make the name field required, it should not be null or blank.
-3. Add a computed property to `EmployeeDTO` that includes street and city like so: `12 Baker Street, London`
-   - Show the property in the grid instead of the individual fields.
-   - Disable filtering and sorting for the computed address property.
-4. As it turns out each employee also needs to be assigned to a department. There already is a `Department` entity and the `Employee` entity already has a `department` property.
+3. As it turns out each employee also needs to be assigned to a department. There already is a `Department` entity and the `Employee` entity already has a `department` property.
     - Add `departmentId` and `departmentName` to `EmployeeDTO`.
     - Add a select to the form for selecting the department.
-5. Make sorting and filtering for the name and email fields work.
-6. Make sorting and filtering for the department name work.
+4. Make sorting and filtering for the name and email fields work.
+5. Make sorting and filtering for the department name work.
 
 To start with the tasks:
 - Clone this repository
